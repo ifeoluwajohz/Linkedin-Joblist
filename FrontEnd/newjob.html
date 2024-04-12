@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./index.css" >
+    <title>Linkedin Job SearchList</title>
+</head>
+<body>
+    <div class="container">
+        <div class="main-container">
+            <h1>Linkedin Job Searchlist</h1>
+            <form id="form" action="/submit" method="post">
+                <input type="text" id="JobTitle"  placeholder="Search job by name..." required >
+                <input type="text" id="JobLocation" placeholder="By location..." required >
+                <input type="text" id="JobCompany"  placeholder="Name of Company..." required>
+                <input type="date" id="JobDeadline"   required>
+                <br>
+                <button id="button_post">Submit</button>
+            </form>
+            <a href="./index.html">Get A Job</a>
+            <p id="output"></p>
+        </div>
+    </div>
+    <script src="./newjob.js"></script>
+</body>
+</html> 

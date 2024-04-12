@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./index.css">
+  <title>Linkedin Job Searchlist</title>
+</head>
+<body>
+  <div class="main-container">
+    <h1>Linkedin Job Searchlist</h1>
+    <form id="searchForm">
+      <input type="text" id="titleInput" placeholder="Search job by name..." required>
+      <input type="text" id="locationInput" placeholder="By Location..." required><br>
+      <button type="button" onclick="searchJobs()">Search</button>
+    </form>
+    <a href="./newjob.html">Post a new job instead ?</a>
+  </div>
+
+  <div id="resultsContainer" class="output">
+    <div id="resultsList">
+    <h2 class="see">Search Results</h2>
+    </div>
+  </div>
+
+  <script>
+    async function searchJobs() {
+      const title = document.getElementById('titleInput').value;
+      const location = document.getElementById('locationInput').value;
+
+      const url = `http://localhost:5000/Linkedin_Joblist/?title=${title}&location=${location}`;
+
+      try {
+        const response = await fetch(url);
+        const jobs = await response.json();
+
+        const resultsList = document.getElementById('resultsList');
+        
+        if(jobs.length !== 0){
+
+          jobs.forEach((job) => {
+          const div = document.createElement('div');
+          const dateString = job.deadline;
+          const date = new Date(dateString);
+
+          const formattedDate = date.toLocaleString('en-US', {
+            month : "short",
+            day: "numeric"
+          })
+
+          div.innerHTML = `
+            <div>
+              <h3>${job.title}</h3>  <span>${job.company}</span>
+            </div>
+            <div>
+              <p> closes: ${formattedDate}</p>   <h3>${job.location}</h3>
+            </div>
+          `;
+          
+
+          resultsList.appendChild(div);
+        })}else{
+          resultsList.innerHTML = 'No Such Job Available for now!';
+        }
+        ;
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    }
+  </script>
+</body>
+</html>
