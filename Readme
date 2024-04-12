@@ -7,10 +7,3 @@ FrontEnd :- HTML, css, Jvascript
 BackEnd :- Express.js
 
 There is possibility of using Fetch Api for fetching api's from our server
-
-install 
-uuid
-axios
-cors
-body-parser
-mongoose
